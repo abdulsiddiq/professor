@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="match_parent"
+              android:background="@drawable/signupbg"
+    >
+    <college.com.collegenetwork.utilpacks.MyTextView
+        android:id="@+id/newBtn"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Add Subject"
+        android:gravity="center"
+        android:background="@drawable/rectangle"
+        android:textSize="25sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/rowData"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            >
+            <college.com.collegenetwork.utilpacks.MyTextView
+                android:id="@+id/profName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Prof Name"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:background="@drawable/rectangle"
+                android:layout_weight="1"
+                />
+            <college.com.collegenetwork.utilpacks.MyTextView
+                android:id="@+id/venue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Venue"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:background="@drawable/rectangle"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+        <college.com.collegenetwork.utilpacks.MyTextView
+            android:id="@+id/subStream"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stream"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:background="@drawable/rectangle"
+            />
+        <college.com.collegenetwork.utilpacks.MyTextView
+            android:id="@+id/subName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subject Name"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:background="@drawable/rectangle"
+            />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <college.com.collegenetwork.utilpacks.MyTextView
+                android:id="@+id/totalCap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Capacity"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:minEms="4"
+                android:background="@drawable/rectangle"
+                />
+
+            <college.com.collegenetwork.utilpacks.MyTextView
+                android:id="@+id/editBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:background="@drawable/rectangle"
+                android:minEms="3"
+                />
+
+            <college.com.collegenetwork.utilpacks.MyTextView
+                android:id="@+id/deleteBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:background="@drawable/rectangle"
+                />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        >
+        <college.com.collegenetwork.utilpacks.MyTextView
+            android:id="@+id/subjects"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:text="Manage Subjects"
+            android:gravity="center"
+            android:background="@drawable/rectangle"
+            android:textSize="25sp"
+            android:layout_weight="1"
+            />
+
+        <college.com.collegenetwork.utilpacks.MyTextView
+            android:id="@+id/professors"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:text="Manage Prof"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:background="@drawable/rectangle"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>

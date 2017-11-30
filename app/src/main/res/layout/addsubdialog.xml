@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/signupbg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <college.com.collegenetwork.utilpacks.MyEditText
+            android:textSize="16dp"
+            android:id="@+id/subName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subject Name"
+            android:textColorHint="#ADCCE2"
+            android:textColor="#ADCCE2"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:background="#0000"
+            android:padding="16dp"
+            android:layout_marginRight="35dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="1dp"
+            android:background="#ADCCE2" />
+        <college.com.collegenetwork.utilpacks.MyEditText
+            android:textSize="16dp"
+            android:id="@+id/subStream"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Stream"
+            android:textColorHint="#ADCCE2"
+            android:textColor="#ADCCE2"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:background="#0000"
+            android:padding="16dp"
+            android:layout_marginRight="35dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="1dp"
+            android:background="#ADCCE2" />
+        <college.com.collegenetwork.utilpacks.MyEditText
+            android:textSize="16dp"
+            android:id="@+id/subProf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Professor"
+            android:textColorHint="#ADCCE2"
+            android:textColor="#ADCCE2"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:background="#0000"
+            android:padding="16dp"
+            android:layout_marginRight="35dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="1dp"
+            android:background="#ADCCE2" />
+        <college.com.collegenetwork.utilpacks.MyEditText
+            android:textSize="16dp"
+            android:id="@+id/timing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Wednesday, 13:00"
+            android:textColorHint="#ADCCE2"
+            android:textColor="#ADCCE2"
+            android:layout_marginLeft="22dp"
+            android:inputType="text"
+            android:background="#0000"
+            android:padding="16dp"
+            android:layout_marginRight="35dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="1dp"
+            android:background="#ADCCE2" />
+        <college.com.collegenetwork.utilpacks.MyEditText
+            android:textSize="16dp"
+            android:id="@+id/capacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="capacity"
+            android:textColorHint="#ADCCE2"
+            android:textColor="#ADCCE2"
+            android:layout_marginLeft="22dp"
+            android:inputType="number"
+            android:background="#0000"
+            android:padding="16dp"
+            android:layout_marginRight="35dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="1dp"
+            android:background="#ADCCE2" />
+
+
+    </LinearLayout>
+</RelativeLayout>
