@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/rowData"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        >
+        <college.com.collegenetwork.utilpacks.MyTextView
+            android:id="@+id/profName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Prof Name"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:background="@drawable/rectangle"
+            android:layout_weight="1"
+            android:visibility="gone"
+            />
+        <college.com.collegenetwork.utilpacks.MyTextView
+            android:id="@+id/venue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Venue"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:background="@drawable/rectangle"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+    <college.com.collegenetwork.utilpacks.MyTextView
+        android:id="@+id/subStream"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stream"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:background="@drawable/rectangle"
+        />
+    <college.com.collegenetwork.utilpacks.MyTextView
+        android:id="@+id/subName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subject Name"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:background="@drawable/rectangle"
+        />
+
+</LinearLayout>

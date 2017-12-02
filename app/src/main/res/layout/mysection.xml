@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@drawable/signupbg"
+    >
 
-<ListView
-    android:id="@+id/section_list"
-    android:layout_width="match_parent"
-    android:dividerHeight="15sp"
-    android:layout_height="match_parent"/>
+    <LinearLayout
+        android:id="@+id/prof_section"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        >
 
-</LinearLayout>
+        <college.com.collegenetwork.utilpacks.MyTextView
+            android:id="@+id/timetable_section"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Time Table"
+            android:background="@drawable/rectangle"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:layout_centerInParent="true"
+            />
+
+        <college.com.collegenetwork.utilpacks.MyTextView
+            android:id="@+id/enrolledSection"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Students Enrolled"
+            android:background="@drawable/rectangle"
+            android:gravity="center"
+            />
+
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/enrolledSectionList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+</RelativeLayout>

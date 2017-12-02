@@ -18,4 +18,5 @@ public interface ApplicationUrl
     String CHANGE_APPROVAL = BASE_URL+"prof_approve.php";
     String ADMIN_SUBJECTS = BASE_URL+"admin_subs.php";
     String ADMIN_PROFESSORS = BASE_URL+"admin_profs.php";
+    String PROF_TT = BASE_URL+"prof_tt.php";
 }

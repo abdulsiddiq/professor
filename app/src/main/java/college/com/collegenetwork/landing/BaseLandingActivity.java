@@ -36,7 +36,7 @@ public class BaseLandingActivity extends AppCompatActivity implements FragmentNa
             @Override
             public void onClick( View v )
             {
-                showFragment(new MySectionFragment(), false);
+                showFragment(new MySectionFragment(), true);
             }
         });
 
@@ -53,7 +53,7 @@ public class BaseLandingActivity extends AppCompatActivity implements FragmentNa
                 @Override
                 public void onClick( View v )
                 {
-                    showFragment(new MyApprovalFragment(),false);
+                    showFragment(new MyApprovalFragment(),true);
                 }
             });
         }

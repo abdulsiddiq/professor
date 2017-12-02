@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,7 +79,10 @@ public class NewSubjectHandler implements View.OnClickListener
                     {
                         if(obj instanceof JSONObject)
                         {
+                            JSONObject jsonObject = (JSONObject) obj;
+                            String userMsg = jsonObject.optString("msg");
 
+                            Toast.makeText(_context,userMsg,Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, jsonBodyValues).execute();
