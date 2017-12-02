@@ -100,9 +100,9 @@ public class NewSubjectHandler implements View.OnClickListener
 
     private void initTimeSpinners( Spinner date, Spinner hour, Spinner minutes )
     {
-        ArrayAdapter dateAdapter = new ArrayAdapter(_context, android.R.layout.simple_spinner_item, Utils.DAYS);
-        ArrayAdapter hourAdapter = new ArrayAdapter(_context, android.R.layout.simple_spinner_item, Utils.HOURS);
-        ArrayAdapter minutesAdapter = new ArrayAdapter(_context, android.R.layout.simple_spinner_item, Utils.MINUTES);
+        ArrayAdapter dateAdapter = new ArrayAdapter(_context, R.layout.spinner_item, Utils.DAYS);
+        ArrayAdapter hourAdapter = new ArrayAdapter(_context, R.layout.spinner_item, Utils.HOURS);
+        ArrayAdapter minutesAdapter = new ArrayAdapter(_context,R.layout.spinner_item, Utils.MINUTES);
 
         date.setAdapter(dateAdapter);
         hour.setAdapter(hourAdapter);

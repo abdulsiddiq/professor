@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Subject Name"
-            android:textColorHint="#ADCCE2"
-            android:textColor="#ADCCE2"
+            android:textColorHint="#333536"
+            android:textColor="#0a0909"
             android:layout_marginLeft="22dp"
             android:inputType="text"
             android:background="#0000"
@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Stream"
-            android:textColorHint="#ADCCE2"
-            android:textColor="#ADCCE2"
+            android:textColorHint="#333536"
+            android:textColor="#0a0909"
             android:layout_marginLeft="22dp"
             android:inputType="text"
             android:background="#0000"
@@ -66,7 +66,7 @@
 -->
         <Spinner
             android:id="@+id/prof_name_spinner"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="31dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginRight="40dp"
@@ -94,28 +94,26 @@
             android:layout_marginRight="35dp"/>
 -->
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginRight="35dp"
-            android:layout_marginLeft="22dp"
-            >
+            android:orientation="horizontal">
 
             <Spinner
                 android:id="@+id/dayspinner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
+
             <Spinner
                 android:id="@+id/hour_spinner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
 
             <Spinner
                 android:id="@+id/minute_spinner"
                 android:layout_width="100dp"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp" />
         </LinearLayout>
 
         <View
@@ -130,8 +128,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="capacity"
-            android:textColorHint="#ADCCE2"
-            android:textColor="#ADCCE2"
+            android:textColorHint="#333536"
+            android:textColor="#0a0909"
             android:layout_marginLeft="22dp"
             android:inputType="number"
             android:background="#0000"
