@@ -8,14 +8,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import college.com.collegenetwork.R;
-import college.com.collegenetwork.models.ProfessorVO;
 import college.com.collegenetwork.utilpacks.ApplicationUrl;
 import college.com.collegenetwork.utilpacks.MyEditText;
 import college.com.collegenetwork.utilpacks.Utils;
@@ -54,7 +50,7 @@ public class NewSubjectHandler implements View.OnClickListener
         final MyEditText subCapacity = (MyEditText) promptsView.findViewById(R.id.capacity);
 
 
-        getProfs(subProf);
+        Utils.getProfs(_context,subProf);
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener()
         {
             @Override
@@ -68,7 +64,7 @@ public class NewSubjectHandler implements View.OnClickListener
                     jsonBodyValues.put("subname",subname.getText().toString());
                     jsonBodyValues.put("stream",subStream.getText().toString());
                     jsonBodyValues.put("subprof",subProf.getSelectedItem());
-                    jsonBodyValues.put("timing",getTiming(date,hour,minutes));
+                    jsonBodyValues.put("timing",Utils.getTiming(date,hour,minutes));
                     jsonBodyValues.put("cap",subCapacity.getText().toString());
 
                 }catch (JSONException ex)
@@ -80,7 +76,10 @@ public class NewSubjectHandler implements View.OnClickListener
                     @Override
                     public void processResponse( Object obj, int status )
                     {
+                        if(obj instanceof JSONObject)
+                        {
 
+                        }
                     }
                 }, jsonBodyValues).execute();
             }
@@ -112,57 +111,5 @@ public class NewSubjectHandler implements View.OnClickListener
 
     }
 
-    private String getTiming( Spinner date, Spinner hour, Spinner minutes )
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.append(date.getSelectedItem())
-                .append(hour.getSelectedItem())
-                .append(minutes.getSelectedItem());
-        return builder.toString();
-    }
-
-    private void getProfs( final Spinner chooser)
-    {
-        JSONObject objects = new JSONObject();
-        try
-        {
-            objects.put("method","fetch");
-        }catch (JSONException ex)
-        {
-
-        }
-        new WebserviceProvider(ApplicationUrl.ADMIN_PROFESSORS, WebserviceProvider.RequestType.POST, new IWebResponseProcessor()
-        {
-            @Override
-            public void processResponse( Object obj, int status )
-            {
-//                Add professors to the chooser list
-                if (obj instanceof JSONObject)
-                {
-                    JSONArray array = ( (JSONObject) obj ).optJSONArray("proflist");
-                    ArrayList<ProfessorVO> professorVOS = new ArrayList<>();
-                    ArrayList<String> profNames = new ArrayList<>();
-                    for (int i = 0; i < array.length(); i++)
-                    {
-                        JSONObject object = array.optJSONObject(i);
-                        String fullName = object.optString("name");
-                        profNames.add(fullName);
-                        String email = object.optString("mail");
-                        String stream = object.optString("stream");
-
-                        ProfessorVO vo = new ProfessorVO();
-                        vo.setName(fullName);
-                        vo.setEmail(email);
-                        vo.setStream(stream);
-
-                        professorVOS.add(vo);
-                    }
-
-                    ArrayAdapter aa = new ArrayAdapter(_context, R.layout.spinner_item, profNames);
-                    chooser.setAdapter(aa);
-                }
-            }
-        }, objects).execute();
-    }
 
 }

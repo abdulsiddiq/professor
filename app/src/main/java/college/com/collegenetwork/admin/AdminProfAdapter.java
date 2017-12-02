@@ -47,13 +47,13 @@ public class AdminProfAdapter extends RecyclerView.Adapter<AdminProfAdapter.Item
     @Override
     public void onBindViewHolder( ItemHolder holder, int position )
     {
-        holder.bind(position, _professors.get(position));
+        holder.bind(position);
     }
 
     @Override
     public int getItemCount()
     {
-        return _professors.size();
+        return _professors.size()+1;
     }
 
 
@@ -105,7 +105,7 @@ public class AdminProfAdapter extends RecyclerView.Adapter<AdminProfAdapter.Item
             deleteBtn = (TextView) itemView.findViewById(R.id.deleteBtn);
         }
 
-        public void bind(int position,final ProfessorVO vo)
+        public void bind(int position)
         {
             if (position == 0)
             {
@@ -117,6 +117,7 @@ public class AdminProfAdapter extends RecyclerView.Adapter<AdminProfAdapter.Item
             }
             else
             {
+                final ProfessorVO vo = _professors.get(position-1);
                 detailRow.setVisibility(View.VISIBLE);
                 addBtn.setVisibility(View.GONE);
 
