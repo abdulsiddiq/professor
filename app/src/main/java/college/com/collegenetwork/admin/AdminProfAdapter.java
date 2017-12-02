@@ -17,7 +17,9 @@ import java.util.ArrayList;
 
 import college.com.collegenetwork.R;
 import college.com.collegenetwork.models.ProfessorVO;
+import college.com.collegenetwork.models.SubjectVO;
 import college.com.collegenetwork.utilpacks.ApplicationUrl;
+import college.com.collegenetwork.utilpacks.MyTextView;
 import college.com.collegenetwork.webservicehelper.IWebResponseProcessor;
 import college.com.collegenetwork.webservicehelper.WebserviceProvider;
 
@@ -40,7 +42,7 @@ public class AdminProfAdapter extends RecyclerView.Adapter<AdminProfAdapter.Item
     @Override
     public ItemHolder onCreateViewHolder( ViewGroup parent, int viewType )
     {
-        View convertView = LayoutInflater.from(_context).inflate(R.layout.adminprofitem,null);
+        View convertView = LayoutInflater.from(_context).inflate(R.layout.admin_subject_item,null);
         return new ItemHolder(convertView);
     }
 
@@ -85,84 +87,27 @@ public class AdminProfAdapter extends RecyclerView.Adapter<AdminProfAdapter.Item
 
     class ItemHolder extends RecyclerView.ViewHolder
     {
-        TextView profName;
-        TextView profEmail;
-        TextView profStream;
-        TextView addBtn;
-        TextView editBtn;
-        TextView deleteBtn;
-        LinearLayout detailRow;
+        MyTextView _subTV;
+
 
         public ItemHolder( View itemView )
         {
             super(itemView);
-            profName= (TextView) itemView.findViewById(R.id.profName);
-            profStream = (TextView) itemView.findViewById(R.id.profStream);
-            profEmail= (TextView) itemView.findViewById(R.id.profMail);
-            addBtn= (TextView) itemView.findViewById(R.id.newBtn);
-            editBtn= (TextView) itemView.findViewById(R.id.editBtn);
-            detailRow= (LinearLayout) itemView.findViewById(R.id.rowData);
-            deleteBtn = (TextView) itemView.findViewById(R.id.deleteBtn);
+            _subTV = (MyTextView) itemView.findViewById(R.id.subject);
         }
 
         public void bind(int position)
         {
-            if (position == 0)
+            if(position == 0)
             {
-                detailRow.setVisibility(View.GONE);
-                addBtn.setVisibility(View.VISIBLE);
-
-                addBtn.setOnClickListener(new AddProfHandler());
-
+                _subTV.setText("Add Professor");
+                _subTV.setOnClickListener(new AddProfHandler());
             }
             else
             {
-                final ProfessorVO vo = _professors.get(position-1);
-                detailRow.setVisibility(View.VISIBLE);
-                addBtn.setVisibility(View.GONE);
-
-
-                profName.setText(vo.getName());
-                profEmail.setText(vo.getEmail());
-                profStream.setText(vo.getStream());
-
-                editBtn.setOnClickListener(new EditProfHandler(vo));
-
-                deleteBtn.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick( View v )
-                    {
-                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(v.getContext());
-                        dialogBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener()
-                        {
-                            @Override
-                            public void onClick( DialogInterface dialog, int which )
-                            {
-                                deleteProf(vo);
-                            }
-                        });
-                        dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener()
-                        {
-                            @Override
-                            public void onClick( DialogInterface dialog, int which )
-                            {
-                                dialog.dismiss();
-                            }
-                        });
-                        dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener()
-                        {
-                            @Override
-                            public void onDismiss( DialogInterface dialog )
-                            {
-                            }
-                        });
-                        dialogBuilder.setMessage("Are you sure delete the Professor?");
-                        AlertDialog dialog = dialogBuilder.create();
-                        dialog.show();
-
-                    }
-                });
+                ProfessorVO vo = _professors.get(position-1);
+                _subTV.setText(vo.getName());
+                _subTV.setOnClickListener(new EditProfHandler(vo));
             }
 
 
