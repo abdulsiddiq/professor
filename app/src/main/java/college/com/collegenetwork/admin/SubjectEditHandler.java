@@ -43,8 +43,8 @@ public class SubjectEditHandler implements View.OnClickListener , IWebResponsePr
 
         final MyEditText subname = (MyEditText) promptsView.findViewById(R.id.subName);
         final MyEditText subStream = (MyEditText) promptsView.findViewById(R.id.subStream);
-        final MyEditText subProf = (MyEditText) promptsView.findViewById(R.id.subProf);
-        final MyEditText subTiming = (MyEditText) promptsView.findViewById(R.id.timing);
+        final MyEditText subProf = (MyEditText) promptsView.findViewById(R.id.subStream);
+        final MyEditText subTiming = (MyEditText) promptsView.findViewById(R.id.subStream);
         final MyEditText subCapacity = (MyEditText) promptsView.findViewById(R.id.capacity);
 
         subname.setText(_vo.getSubName());

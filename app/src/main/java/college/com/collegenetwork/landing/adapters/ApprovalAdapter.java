@@ -1,10 +1,10 @@
 package college.com.collegenetwork.landing.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -24,7 +24,7 @@ import college.com.collegenetwork.webservicehelper.WebserviceProvider;
  * Created by Krypto on 28-08-2017.
  */
 
-public class ApprovalAdapter  extends BaseAdapter
+public class ApprovalAdapter  extends RecyclerView.Adapter<ApprovalAdapter.ItemHolder>
 {
 
     ArrayList<ApprovalVO> _approvalVOs;
@@ -36,72 +36,25 @@ public class ApprovalAdapter  extends BaseAdapter
     }
 
     @Override
-    public int getCount()
+    public ItemHolder onCreateViewHolder( ViewGroup parent, int viewType )
+    {
+        View convertView = LayoutInflater.from(_context).inflate(R.layout.student_section_item,null);
+        return new ItemHolder(convertView);
+    }
+
+    @Override
+    public void onBindViewHolder( ItemHolder holder, int position )
+    {
+
+        holder.onBind(_approvalVOs.get(position));
+    }
+
+    @Override
+    public int getItemCount()
     {
         return _approvalVOs.size();
     }
 
-    @Override
-    public ApprovalVO getItem( int position )
-    {
-        return _approvalVOs.get(position);
-    }
-
-    @Override
-    public long getItemId( int position )
-    {
-        return 0;
-    }
-
-    @Override
-    public View getView( int position, View convertView, ViewGroup parent )
-    {
-        ItemHolder holder;
-        if(convertView == null)
-        {
-            holder = new ItemHolder();
-            convertView = LayoutInflater.from(_context).inflate(R.layout.student_section_item,null);
-            holder.studentName = (TextView) convertView.findViewById(R.id.sub_name);
-            holder.subjectName = (TextView) convertView.findViewById(R.id.prof_name);
-            holder.venue= (TextView) convertView.findViewById(R.id.venue);
-            holder.approveBtn= (TextView) convertView.findViewById(R.id.approveBtn);
-            holder.rejectBtn= (TextView) convertView.findViewById(R.id.rejectBtn);
-            holder.approveBtn.setVisibility(View.VISIBLE);
-            holder.rejectBtn.setVisibility(View.VISIBLE);
-            convertView.setTag(holder);
-        }
-        else
-        {
-            holder = (ItemHolder) convertView.getTag();
-        }
-        final ApprovalVO vo = getItem(position);
-        holder.subjectName.setText(vo.getSubject());
-        holder.studentName.setText(vo.getStudentName());
-        holder.venue.setText(vo.getTiming());
-
-        holder.approveBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick( View v )
-            {
-
-                callAprroveAPI(true,vo);
-
-            }
-        });
-
-        holder.rejectBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick( View v )
-            {
-                callAprroveAPI(false,vo);
-            }
-        });
-
-        return convertView;
-
-    }
 
     private void callAprroveAPI( boolean approve, final ApprovalVO vo)
     {
@@ -133,7 +86,7 @@ public class ApprovalAdapter  extends BaseAdapter
         }, object).execute();
     }
 
-    private class ItemHolder
+    class ItemHolder extends RecyclerView.ViewHolder
     {
         TextView subjectName;
         TextView studentName;
@@ -141,5 +94,44 @@ public class ApprovalAdapter  extends BaseAdapter
         TextView approveBtn;
         TextView rejectBtn;
 
+        public ItemHolder( View convertView)
+        {
+            super(convertView);
+            studentName = (TextView) convertView.findViewById(R.id.sub_name);
+            subjectName = (TextView) convertView.findViewById(R.id.prof_name);
+            venue= (TextView) convertView.findViewById(R.id.venue);
+            approveBtn= (TextView) convertView.findViewById(R.id.approveBtn);
+            rejectBtn= (TextView) convertView.findViewById(R.id.rejectBtn);
+            approveBtn.setVisibility(View.VISIBLE);
+            rejectBtn.setVisibility(View.VISIBLE);
+       }
+
+       public void onBind(final ApprovalVO vo)
+       {
+           subjectName.setText(vo.getSubject());
+           studentName.setText(vo.getStudentName());
+           venue.setText(vo.getTiming());
+
+           approveBtn.setOnClickListener(new View.OnClickListener()
+           {
+               @Override
+               public void onClick( View v )
+               {
+
+                   callAprroveAPI(true,vo);
+
+               }
+           });
+
+           rejectBtn.setOnClickListener(new View.OnClickListener()
+           {
+               @Override
+               public void onClick( View v )
+               {
+                   callAprroveAPI(false,vo);
+               }
+           });
+
+       }
     }
 }

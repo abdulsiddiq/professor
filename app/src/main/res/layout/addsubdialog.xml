@@ -48,6 +48,8 @@
             android:layout_marginRight="40dp"
             android:layout_height="1dp"
             android:background="#ADCCE2" />
+<!--
+
         <college.com.collegenetwork.utilpacks.MyEditText
             android:textSize="16dp"
             android:id="@+id/subProf"
@@ -61,12 +63,22 @@
             android:background="#0000"
             android:padding="16dp"
             android:layout_marginRight="35dp"/>
+-->
+        <Spinner
+            android:id="@+id/prof_name_spinner"
+            android:layout_marginLeft="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="40dp"
+            />
+
         <View
             android:layout_width="match_parent"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_height="1dp"
             android:background="#ADCCE2" />
+<!--
         <college.com.collegenetwork.utilpacks.MyEditText
             android:textSize="16dp"
             android:id="@+id/timing"
@@ -80,6 +92,32 @@
             android:background="#0000"
             android:padding="16dp"
             android:layout_marginRight="35dp"/>
+-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="22dp"
+            >
+
+            <Spinner
+                android:id="@+id/dayspinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <Spinner
+                android:id="@+id/hour_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <Spinner
+                android:id="@+id/minute_spinner"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_marginLeft="40dp"

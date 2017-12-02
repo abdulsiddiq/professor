@@ -2,10 +2,11 @@ package college.com.collegenetwork.admin;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +18,7 @@ import college.com.collegenetwork.R;
 import college.com.collegenetwork.models.SubjectVO;
 import college.com.collegenetwork.utilpacks.ApplicationUrl;
 import college.com.collegenetwork.utilpacks.BaseFragment;
+import college.com.collegenetwork.utilpacks.SubjectClickListener;
 import college.com.collegenetwork.webservicehelper.IWebResponseProcessor;
 import college.com.collegenetwork.webservicehelper.WebserviceProvider;
 
@@ -26,7 +28,7 @@ import college.com.collegenetwork.webservicehelper.WebserviceProvider;
 
 public class ManageSubjectFragment extends BaseFragment implements IWebResponseProcessor
 {
-    ListView listView;
+    RecyclerView listView;
 
     @Nullable
     @Override
@@ -39,7 +41,7 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
     public void onViewCreated( View view, @Nullable Bundle savedInstanceState )
     {
         super.onViewCreated(view, savedInstanceState);
-        listView = (ListView) view.findViewById(R.id.approval_list);
+        listView = (RecyclerView) view.findViewById(R.id.approval_list);
         getSubjects();
     }
 
@@ -64,7 +66,7 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
         if (obj instanceof JSONObject)
         {
             JSONArray array = ( (JSONObject) obj ).optJSONArray("subjectList");
-            ArrayList<SubjectVO> subjectVos = new ArrayList<>();
+            final ArrayList<SubjectVO> subjectVos = new ArrayList<>();
             for(int i = 0; i< array.length();i++)
             {
                 JSONObject object = array.optJSONObject(i);
@@ -81,8 +83,22 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
             }
 
 
+/*
             AdminSubjectAdapter adminSubAdapter = new AdminSubjectAdapter(getContext(),subjectVos);
             listView.setAdapter(adminSubAdapter);
+*/
+            SubjectListAdapter adapter = new SubjectListAdapter(subjectVos, new SubjectClickListener()
+            {
+                @Override
+                public void onClickSubject( SubjectVO subjectVO )
+                {
+//                    Open Subject Edit Fragment
+                    new SubjectEditHandler(subjectVO).onClick(listView);
+                }
+            });
+
+            listView.setLayoutManager(new LinearLayoutManager(getContext()));
+            listView.setAdapter(adapter);
 
         }
     }

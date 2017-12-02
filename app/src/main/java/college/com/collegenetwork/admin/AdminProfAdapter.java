@@ -3,10 +3,10 @@ package college.com.collegenetwork.admin;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,115 +25,37 @@ import college.com.collegenetwork.webservicehelper.WebserviceProvider;
  * Created by Krypto on 03-11-2017.
  */
 
-public class AdminProfAdapter extends BaseAdapter
+public class AdminProfAdapter extends RecyclerView.Adapter<AdminProfAdapter.ItemHolder>
 {
-    ArrayList<ProfessorVO> _subjects;
+    ArrayList<ProfessorVO> _professors;
     Context _context;
 
     public AdminProfAdapter(Context context, ArrayList<ProfessorVO> professors)
     {
-        _subjects = new ArrayList<>();
-        _subjects = professors;
+        _professors = new ArrayList<>();
+        _professors = professors;
         _context = context;
     }
 
     @Override
-    public int getCount() {
-        return _subjects.size()+1;
+    public ItemHolder onCreateViewHolder( ViewGroup parent, int viewType )
+    {
+        View convertView = LayoutInflater.from(_context).inflate(R.layout.adminprofitem,null);
+        return new ItemHolder(convertView);
     }
 
     @Override
-    public ProfessorVO getItem(int position) {
-        return _subjects.get(position);
+    public void onBindViewHolder( ItemHolder holder, int position )
+    {
+        holder.bind(position, _professors.get(position));
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
+    public int getItemCount()
+    {
+        return _professors.size();
     }
 
-    @Override
-    public View getView( int position, View convertView, ViewGroup parent) {
-        ItemHolder holder;
-        if(convertView == null)
-        {
-            holder = new ItemHolder();
-            convertView = LayoutInflater.from(_context).inflate(R.layout.adminprofitem,null);
-            holder.profName= (TextView) convertView.findViewById(R.id.profName);
-            holder.profStream = (TextView) convertView.findViewById(R.id.profStream);
-            holder.profEmail= (TextView) convertView.findViewById(R.id.profMail);
-            holder.addBtn= (TextView) convertView.findViewById(R.id.newBtn);
-            holder.editBtn= (TextView) convertView.findViewById(R.id.editBtn);
-            holder.detailRow= (LinearLayout) convertView.findViewById(R.id.rowData);
-            holder.deleteBtn = (TextView) convertView.findViewById(R.id.deleteBtn);
-            convertView.setTag(holder);
-        }
-        else
-        {
-            holder = (ItemHolder) convertView.getTag();
-        }
-
-        if (position == 0)
-        {
-            holder.detailRow.setVisibility(View.GONE);
-            holder.addBtn.setVisibility(View.VISIBLE);
-
-            holder.addBtn.setOnClickListener(new AddProfHandler());
-
-        }
-        else
-        {
-            holder.detailRow.setVisibility(View.VISIBLE);
-            holder.addBtn.setVisibility(View.GONE);
-
-            final ProfessorVO vo = getItem(position-1);
-
-            holder.profName.setText(vo.getName());
-            holder.profEmail.setText(vo.getEmail());
-            holder.profStream.setText(vo.getStream());
-
-            holder.editBtn.setOnClickListener(new EditProfHandler(vo));
-
-            holder.deleteBtn.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick( View v )
-                {
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(v.getContext());
-                    dialogBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick( DialogInterface dialog, int which )
-                        {
-                            deleteProf(vo);
-                        }
-                    });
-                    dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick( DialogInterface dialog, int which )
-                        {
-                            dialog.dismiss();
-                        }
-                    });
-                    dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener()
-                    {
-                        @Override
-                        public void onDismiss( DialogInterface dialog )
-                        {
-                        }
-                    });
-                    dialogBuilder.setMessage("Are you sure delete the Professor?");
-                    AlertDialog dialog = dialogBuilder.create();
-                    dialog.show();
-
-                }
-            });
-        }
-
-
-        return convertView;
-    }
 
 
     private void deleteProf( ProfessorVO _vo)
@@ -161,7 +83,7 @@ public class AdminProfAdapter extends BaseAdapter
 
     }
 
-    private class ItemHolder
+    class ItemHolder extends RecyclerView.ViewHolder
     {
         TextView profName;
         TextView profEmail;
@@ -170,5 +92,79 @@ public class AdminProfAdapter extends BaseAdapter
         TextView editBtn;
         TextView deleteBtn;
         LinearLayout detailRow;
+
+        public ItemHolder( View itemView )
+        {
+            super(itemView);
+            profName= (TextView) itemView.findViewById(R.id.profName);
+            profStream = (TextView) itemView.findViewById(R.id.profStream);
+            profEmail= (TextView) itemView.findViewById(R.id.profMail);
+            addBtn= (TextView) itemView.findViewById(R.id.newBtn);
+            editBtn= (TextView) itemView.findViewById(R.id.editBtn);
+            detailRow= (LinearLayout) itemView.findViewById(R.id.rowData);
+            deleteBtn = (TextView) itemView.findViewById(R.id.deleteBtn);
+        }
+
+        public void bind(int position,final ProfessorVO vo)
+        {
+            if (position == 0)
+            {
+                detailRow.setVisibility(View.GONE);
+                addBtn.setVisibility(View.VISIBLE);
+
+                addBtn.setOnClickListener(new AddProfHandler());
+
+            }
+            else
+            {
+                detailRow.setVisibility(View.VISIBLE);
+                addBtn.setVisibility(View.GONE);
+
+
+                profName.setText(vo.getName());
+                profEmail.setText(vo.getEmail());
+                profStream.setText(vo.getStream());
+
+                editBtn.setOnClickListener(new EditProfHandler(vo));
+
+                deleteBtn.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick( View v )
+                    {
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(v.getContext());
+                        dialogBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick( DialogInterface dialog, int which )
+                            {
+                                deleteProf(vo);
+                            }
+                        });
+                        dialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick( DialogInterface dialog, int which )
+                            {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener()
+                        {
+                            @Override
+                            public void onDismiss( DialogInterface dialog )
+                            {
+                            }
+                        });
+                        dialogBuilder.setMessage("Are you sure delete the Professor?");
+                        AlertDialog dialog = dialogBuilder.create();
+                        dialog.show();
+
+                    }
+                });
+            }
+
+
+        }
     }
 }

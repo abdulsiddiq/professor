@@ -2,10 +2,11 @@ package college.com.collegenetwork.admin;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +27,7 @@ import college.com.collegenetwork.webservicehelper.WebserviceProvider;
 
 public class ManageProfessorsFragment extends BaseFragment implements IWebResponseProcessor
 {
-    ListView listView;
+    RecyclerView listView;
 
     @Nullable
     @Override
@@ -39,11 +40,11 @@ public class ManageProfessorsFragment extends BaseFragment implements IWebRespon
     public void onViewCreated( View view, @Nullable Bundle savedInstanceState )
     {
         super.onViewCreated(view, savedInstanceState);
-        listView = (ListView) view.findViewById(R.id.approval_list);
-        getSubjects();
+        listView = (RecyclerView) view.findViewById(R.id.approval_list);
+        getProfs();
     }
 
-    private void getSubjects()
+    private void getProfs()
     {
         JSONObject objects = new JSONObject();
         try
@@ -82,6 +83,7 @@ public class ManageProfessorsFragment extends BaseFragment implements IWebRespon
 
 
             AdminProfAdapter adminProfAdapter = new AdminProfAdapter(getContext(),professorVOS);
+            listView.setLayoutManager(new LinearLayoutManager(getContext()));
             listView.setAdapter(adminProfAdapter);
 
         }

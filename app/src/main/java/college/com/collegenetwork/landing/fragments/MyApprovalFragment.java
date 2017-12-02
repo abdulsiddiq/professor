@@ -2,10 +2,11 @@ package college.com.collegenetwork.landing.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,7 +28,7 @@ import college.com.collegenetwork.webservicehelper.WebserviceProvider;
 
 public class MyApprovalFragment extends BaseFragment implements IWebResponseProcessor
 {
-    ListView listView;
+    RecyclerView listView;
 
     @Nullable
     @Override
@@ -40,7 +41,7 @@ public class MyApprovalFragment extends BaseFragment implements IWebResponseProc
     public void onViewCreated( View view, @Nullable Bundle savedInstanceState )
     {
         super.onViewCreated(view, savedInstanceState);
-        listView = (ListView) view.findViewById(R.id.approval_list);
+        listView = (RecyclerView) view.findViewById(R.id.approval_list);
         getApprovals();
     }
 
@@ -82,6 +83,7 @@ public class MyApprovalFragment extends BaseFragment implements IWebResponseProc
             approvalList.add(new ApprovalVO("sidique","friday","android","computer"));
 
             ApprovalAdapter adapter = new ApprovalAdapter(getContext(), approvalList);
+            listView.setLayoutManager(new LinearLayoutManager(getContext()));
             listView.setAdapter(adapter);
         }
     }

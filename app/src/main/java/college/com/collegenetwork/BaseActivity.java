@@ -29,14 +29,13 @@ public class BaseActivity extends AppCompatActivity implements IWebResponseProce
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         boolean isRegistered = new MySharedPref(getApplicationContext()).isUserRegistered();
-//        showFragment(isRegistered);
-        showFragment(true);
+        showFragment(isRegistered);
     }
 
     private void showFragment( boolean isRegistered )
     {
         Fragment fragment = !isRegistered ? new SignUpFragment() : new LoginFragment();
-        showFragment(fragment, true);
+        showFragment(fragment, false);
     }
 
     @Override
