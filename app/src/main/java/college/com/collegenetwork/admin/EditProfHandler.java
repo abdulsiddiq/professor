@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -51,18 +50,6 @@ public class EditProfHandler implements View.OnClickListener, IWebResponseProces
         final MyEditText profEmail = (MyEditText) promptsView.findViewById(R.id.profEmail);
         final MyEditText profUserId = (MyEditText) promptsView.findViewById(R.id.userid);
         final MyEditText password = (MyEditText) promptsView.findViewById(R.id.password);
-        final Button deleteProf = (Button) promptsView.findViewById(R.id.deleteProf);
-
-
-        deleteProf.setVisibility(View.VISIBLE);
-        deleteProf.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick( View v )
-            {
-                deleteProf(_vo);
-            }
-        });
 
         profUserId.setVisibility(View.GONE);
         password.setVisibility(View.GONE);
@@ -101,7 +88,7 @@ public class EditProfHandler implements View.OnClickListener, IWebResponseProces
             @Override
             public void onClick( DialogInterface dialog, int which )
             {
-                dialog.cancel();
+                deleteProf(_vo,dialog);
             }
         });
         builder.show();
@@ -120,7 +107,7 @@ public class EditProfHandler implements View.OnClickListener, IWebResponseProces
     }
 
 
-    private void deleteProf( ProfessorVO _vo)
+    private void deleteProf( ProfessorVO _vo,final DialogInterface dialog )
     {
         JSONObject jsonBodyValues = new JSONObject();
         try
@@ -140,6 +127,9 @@ public class EditProfHandler implements View.OnClickListener, IWebResponseProces
             public void processResponse( Object obj, int status )
             {
 //                TODO : Do Nothing
+                String userMsg = ( (JSONObject) obj ).optString("msg");
+                Toast.makeText(_context,userMsg,Toast.LENGTH_SHORT).show();
+                dialog.cancel();
             }
         }, jsonBodyValues).execute();
 
