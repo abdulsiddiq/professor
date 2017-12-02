@@ -20,7 +20,7 @@ public class AdminLandingActivity extends AppCompatActivity implements FragmentN
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_base);
-        showFragment(new AdminBaseFragment(),true);
+        showFragment(new AdminBaseFragment(),false);
     }
 
 
