@@ -93,7 +93,9 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
                 public void onClickSubject( SubjectVO subjectVO )
                 {
 //                    Open Subject Edit Fragment
-                    new SubjectEditHandler(subjectVO).onClick(listView);
+                    SubjectDetailFragment fragment = new SubjectDetailFragment();
+                    fragment.setSubject(getSubjectsByName(subjectVos,subjectVO));
+                    _navigate.showFragment(fragment,true);
                 }
             });
 
@@ -101,5 +103,18 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
             listView.setAdapter(adapter);
 
         }
+    }
+
+    private ArrayList<SubjectVO> getSubjectsByName( ArrayList<SubjectVO> subjectVos, SubjectVO subjectVO )
+    {
+        ArrayList<SubjectVO> tempVOs = new ArrayList<>();
+        for(SubjectVO vo : subjectVos)
+        {
+            if(vo.getSubName().equalsIgnoreCase(subjectVO.getSubName()))
+            {
+                tempVOs.add(vo);
+            }
+        }
+        return tempVOs;
     }
 }

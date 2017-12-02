@@ -66,9 +66,16 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             }
             else
             {
-                SubjectVO vo = _subjects.get(pos-1);
+                final SubjectVO vo = _subjects.get(pos-1);
                 _subTV.setText(vo.getSubName());
-                _subTV.setOnClickListener(new SubjectEditHandler(vo));
+                _subTV.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick( View v )
+                    {
+                        _listener.onClickSubject(vo);
+                    }
+                });
             }
         }
     }
