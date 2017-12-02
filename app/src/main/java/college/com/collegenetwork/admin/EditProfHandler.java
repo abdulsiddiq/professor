@@ -83,7 +83,7 @@ public class EditProfHandler implements View.OnClickListener, IWebResponseProces
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        builder.setNegativeButton("Delete", new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick( DialogInterface dialog, int which )
