@@ -87,6 +87,10 @@ public class StudentsEnrolledFragment extends BaseFragment implements IWebRespon
         {
             JSONObject object = (JSONObject) obj;
 
+            if(getView() == null)
+            {
+                return;
+            }
             int userType = new MySharedPref(getContext()).getUserType();
 
             if(userType == CriticalConstants.STUDENT)
