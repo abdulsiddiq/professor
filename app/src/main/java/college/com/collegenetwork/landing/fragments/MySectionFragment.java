@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +34,8 @@ import college.com.collegenetwork.webservicehelper.WebserviceProvider;
  */
 
 public class MySectionFragment extends BaseFragment implements IWebResponseProcessor {
+
+    ListView _listView;
     @Nullable
     @Override
     public View onCreateView( LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState )
@@ -47,11 +51,11 @@ public class MySectionFragment extends BaseFragment implements IWebResponseProce
 
         if(userType == CriticalConstants.STUDENT)
         {
-/*
             LinearLayout profSection = (LinearLayout) view.findViewById(R.id.prof_section);
             profSection.setVisibility(View.GONE);
-*/
-            _navigate.showFragment(new StudentsEnrolledFragment(),true);
+            _listView = (ListView) view.findViewById(R.id.enrolledSectionList);
+            populateEnrolledSubjects();
+
         }
         else
         {
@@ -131,6 +135,7 @@ public class MySectionFragment extends BaseFragment implements IWebResponseProce
                 }
 
                 StudentSectionAdapter adapter = new StudentSectionAdapter(getContext(),updatedSubjectList);
+                _listView.setAdapter(adapter);
             }
             else
             {
