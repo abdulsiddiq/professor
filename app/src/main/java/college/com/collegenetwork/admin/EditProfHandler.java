@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -50,6 +51,19 @@ public class EditProfHandler implements View.OnClickListener, IWebResponseProces
         final MyEditText profEmail = (MyEditText) promptsView.findViewById(R.id.profEmail);
         final MyEditText profUserId = (MyEditText) promptsView.findViewById(R.id.userid);
         final MyEditText password = (MyEditText) promptsView.findViewById(R.id.password);
+        final Button deleteProf = (Button) promptsView.findViewById(R.id.deleteProf);
+
+
+        deleteProf.setVisibility(View.VISIBLE);
+        deleteProf.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick( View v )
+            {
+                deleteProf(_vo);
+            }
+        });
+
         profUserId.setVisibility(View.GONE);
         password.setVisibility(View.GONE);
 
@@ -105,4 +119,29 @@ public class EditProfHandler implements View.OnClickListener, IWebResponseProces
 
     }
 
+
+    private void deleteProf( ProfessorVO _vo)
+    {
+        JSONObject jsonBodyValues = new JSONObject();
+        try
+        {
+            jsonBodyValues.put("method","delete");
+            jsonBodyValues.put("prevprofName",_vo.getName());
+            jsonBodyValues.put("prevstream",_vo.getStream());
+            jsonBodyValues.put("prevemail",_vo.getEmail());
+
+        }catch (JSONException ex)
+        {
+
+        }
+        new WebserviceProvider(ApplicationUrl.ADMIN_PROFESSORS, WebserviceProvider.RequestType.POST, new IWebResponseProcessor()
+        {
+            @Override
+            public void processResponse( Object obj, int status )
+            {
+//                TODO : Do Nothing
+            }
+        }, jsonBodyValues).execute();
+
+    }
 }
