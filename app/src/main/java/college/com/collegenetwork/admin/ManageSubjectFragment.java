@@ -67,6 +67,7 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
         {
             JSONArray array = ( (JSONObject) obj ).optJSONArray("subjectList");
             final ArrayList<SubjectVO> subjectVos = new ArrayList<>();
+            final ArrayList<SubjectVO> originalVOs = new ArrayList<>();
             for(int i = 0; i< array.length();i++)
             {
                 JSONObject object = array.optJSONObject(i);
@@ -76,10 +77,16 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
                 int subCap = object.optInt("capacity");
                 String subStream = object.optString("stream");
 
+
                 SubjectVO vo = new SubjectVO(subName,subProf,subTiming);
                 vo.setCap(subCap);
                 vo.setStream(subStream);
-                subjectVos.add(vo);
+
+                if(getSubjectsByName(subjectVos,vo).size() == 0)
+                {
+                    subjectVos.add(vo);
+                }
+                originalVOs.add(vo);
             }
 
 
@@ -94,7 +101,7 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
                 {
 //                    Open Subject Edit Fragment
                     SubjectDetailFragment fragment = new SubjectDetailFragment();
-                    fragment.setSubject(getSubjectsByName(subjectVos,subjectVO));
+                    fragment.setSubject(getSubjectsByName(originalVOs,subjectVO));
                     _navigate.showFragment(fragment,true);
                 }
             });
@@ -110,7 +117,7 @@ public class ManageSubjectFragment extends BaseFragment implements IWebResponseP
         ArrayList<SubjectVO> tempVOs = new ArrayList<>();
         for(SubjectVO vo : subjectVos)
         {
-            if(vo.getSubName().equalsIgnoreCase(subjectVO.getSubName()))
+            if(vo.getSubName().trim().equalsIgnoreCase(subjectVO.getSubName().trim()))
             {
                 tempVOs.add(vo);
             }
